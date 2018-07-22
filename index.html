@@ -1,0 +1,130 @@
+<doctype html>
+<html>
+<head> 
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<style>
+#navbar {
+	width:100%;
+	height:20px;
+	top:0 px;
+	position:absolute;
+	z-index:999;
+	background-color: #000;
+	opacity:0.8;
+	padding-top: 10px;
+}
+#navbar a {
+	font-family: Arial;
+	font-size: 16px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #fff;
+}
+.section {
+    background: url('/images/1.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
+</head>
+
+<div id="navbar">
+<a href="Monthly_Stat.html">Flight Stats</a>
+<a href="Monthly_HeatMap.html">Airliner Delay Stats</a>
+<a href="Airliners_Ranking.html">Airliner Ranking</a>
+<a href="Airports_Ranking.html">Airport Ranking</a>
+<a href="#About_the_visualization">About the Visualization</a>
+<a href="#Contact_Us">Author's Section</a>
+</div>
+<div id="wrapper">
+			<div class="section" id="sectionImage1" style="width:100%; height:100%; padding-top:4%; padding-left:3%; padding-right:7%;">
+				<div style="float: left; width: 55%;">
+					<div style="font-size: 60px; font-weight: bold; color:#1a1a1a;">2008 US Domestic Air Traffic Data Assessment<br/></div>
+					<p style="font-size: 30.5px; -webkit-margin-before: 0.2em; -webkit-margin-after: 0.2em; color:#404040;">Interesting attempt to unravel the trends from a multi-dimensional fact sheet</p><br/><br/>
+					<div class="bodyText"><div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What's these all about? </div></br>
+					The flight traffic data set is collected from The U.S. Department of Transportation's (DOT) Bureau of Transportation Statistics (BTS) which tracks the on-time performance of domestic flights operated by large air carriers. It captures key elements of extensive air network which when analyzed carefully helps in capturing insights which are quite intriguing and would often assist in improving the experience of air travel. Dealing with a spreadhseet over around 2M records I have only focussed on few key dimensions for the purpose of scalability and simiplicity</br></br>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What are some of the questions we are trying to answer? </div></br>
+					1.	How does the flight traffic vary over weekdays, months & airliners?</br>
+					2.	Where does the airliners stand when to comes to operational punctuality?</br>
+					3.	How can we rank these carriers on the basis of their performance?</br>
+					4.	What volume of air traffic is handled by some major airports and their tolerance to weather delays?</br></br>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What should we know about the visualization prior scrolling further?</div></br>
+					Over the next few pages we will have the opportunity to exploit the data and understand the tendency pointed out in page synopsis which has been included for guidance & ease of interpretations. The content section will summarize as to what we are about to visualize</br></br>
+					Please sit back, relax and enjoy the journey </div>
+				</div>
+				<div style="float: left; width: 25%;">
+					<p><img src="/images/side.jpg"></p>
+				</div>	
+			</div>
+			<div class="section" style="width:100%; height:100%; padding-left:3%; padding-right:7%;">
+				<div style="float: left; width: 50%;">
+					<p style="font-size: 60px; font-weight: bold; color:#1a1a1a;">An overview<br/></p>
+					<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Where and what are all the curious case details</p>
+					<p class="bodyText">Discussing only over static content it's started to feel a bit boring so let's jump to the exciting part right away. We have divided our analysis into four major sections highlighted below. Each topic will include section to help you navigate and comprehend as to what we are trying to observe:</br></br>
+					1) Flight Stats: Visualization will showcase how exaclty the flight volume vary across weekdays/ months. Viewer will have choice to toggle between weekly and monthly summary and drilling down to a single airliner <a href="Monthly_Stat.html">Please click here to launch</a></br></br>
+					2) Airliner Delay Stats: Visualization will showcase how much of a carrier delay you are expected to observe when availing these airliners. Viewer will have choice to toggle between weekly and monthly summary data which has been presented over a heatmap <a href="Monthly_HeatMap.html">Please click here to launch</a></br></br>
+					3) Airliner Ranking: Visualization will showcase how exaclty can we rank the airliners over the performance metrics of average carrier delay, flights operated & airmiles covered. Viewer will have choice to toggle between the various metrics <a href="Airliners_Ranking.html">Please click here to launch</a></br></br>
+					4) Airport Ranking: Visualization will showcase portions of flight traffic handled by some of the major airports and their tolerance to weather delays. Viewer will have choice to toggle between flights operated and average weather delay observed. A natural log scale for flight volume has been included for better visualization <a href="Airports_Ranking.html">Please click here to launch</a></br></br>
+					All of these sections can also be accessed by the navigation bar provided at the top. We have also added sections below to include details of how the visualization was designed/ prepared followed by a brief details about the author and some of the readily available online resources which can be referred to have such a web-site up and running if needed or desired</br></br>
+					</p>
+					</div>			
+			</div>
+			<div class="section" id="About_the_visualization" style="width:100%; height:100%; padding-left:3%; padding-right:7%;">
+				
+				<div style="float: left; width: 45%;">
+					<p style="font-size: 40px; font-weight: bold; color:#1a1a1a;">About this visualization<br/></p>
+					<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Narrative visualization method</p>
+					<p class="bodyText">This project was created based on the hybrid interactive slideshow ordering technique. Helpful overview have been included with each page providing details on data set, axes choices, colors used & inference. We highly encourage the viewers to exploit and investigate the options provided but they can also choose to just continue</p>
+					<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Scenes</p>
+					<p class="bodyText">
+This visual content has been created with a homepage referencing to four different pages which depict the respective content. This approach appears to be simple and user-friendly. D3 charts included are mainly simple bar diagram and one heatmap. The author has tried to design and order them in his best possible way to convey the intended message. Similar font size, button layout and color scheme have been employed across the links for visual consistency</p>
+					<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Annotations</p>
+					<p class="bodyText"> A helpful text overview has been included with every page which tries to explain the interaction options available and some of the insights which can be observed. All the axes have been approproately labelled; tooltips which appear when we simple hover over an area of interest have been included within each figure. Legends have been included for perspective visualization as and where needed</p>
+				</div>
+				<div style="float: left; width: 45%;">
+					<div style="padding-left:4%;">
+						<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Parameters</p>
+						<p class="bodyText">Multiple parameters have been used for these interactive visualizations</br></br>
+									a) Flight counts by weekdays and months aggregated or filtered by a particular airliner</br>
+									b) Flight delays by weekdays and month for every operating carrier</br>
+									c) Carrier ranking on the basis of delays suffered, flights operated and airmiles travelled</br>
+									d) Airport ranking on the basis of their flight traffic operation capacity and tolerance to weather delays</br></br>
+</p>
+						<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Triggers</p>
+						<p class="bodyText">Triggers have been employed to change between pages as well as for user interaction. Animated buttons have been used to re-render the figures as per user input selection. A simple vertical scroll bar approach has been used for navigation within a page. Besides a helpful navigation bar has also been in the homepage to ease transtion to various sections and charts. All the transitions employ  hyperlinks</p>
+						<p style="font-size: 20px; font-weight: bold; color:#00aaff;">Few cool things to note</p>
+						<p class="bodyText">
+- The buttons dark out when hovered over and simulates an animated press when selected</br>
+- Tooltips automatically adjust to showcase the user selected dimension</br>
+- The axes automatically adjusts on the basis of user input</br>
+- The rectangular bars dark out when hovered over revealing the tooltip</br>
+- Reset button has been included where appropriate to prevent the viewers from getting lost while exploring</br>
+</p>
+						<p style="font-size: 20px; font-weight: bold; color:red;">Warning</p>
+						<p class="bodyText">The website is meant to be visualized on Chrome (recommended), Firefox. It fits best in a screen resolution of at least 1920 X 1080 pixels, smaller screens may notice some of the objects colliding besides the vertical scroll bar growing smaller</p>
+					</div>
+				</div>
+			</div>
+			<div class="section" id="Contact_Us" style="width:100%; height:100%; padding-left:3%; padding-right:7%;">
+				<div style="float: right; width: 50%;">
+					<div style="padding-left:6%;">
+						<p style="font-size: 40px; font-weight: bold; color:#1a1a1a;">Resources</br></p>					
+						<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">Links</p>
+						<p class="bodyText">- <a href=https://www.bts.gov/topics/airlines-and-airports-0>US BOT Dataset</a></br>- <a href=https://d3js.org/>More about data driven documents</a></br>- <a href=https://bl.ocks.org/>Bar graphs and heatmap</a></br>
+						- <a href=https://github.com/>Github Site for free hosting</a></br></p>
+					</div>
+				</div>
+				<div style="float: left; width: 50%;">
+					<p style="font-size: 40px; font-weight: bold; color:#1a1a1a;">About the author<br/></p>
+					<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">The purpose</p>
+					<p class="bodyText">This assignment is meant to serve as the final project for CS 498: Data Visualization course from University of Illinois Urbana-Champaign</p>
+					<p style="font-size: 20px; font-weight: bold; color:#1a1a1a;">The author</p>
+					<p class="bodyText">This project was created by <a href=https://www.linkedin.com/in/manojit-saha-sardar-b9607673>Manojit Saha Sardar</a>. A student of the MCS Degree Program</p>
+					</div>			
+			</div>
+</div>
+
+</body>
+</html>

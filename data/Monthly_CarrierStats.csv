@@ -1,0 +1,219 @@
+Airline,Day Of Week,Month,UniqueCarrier,CarrierDelay
+Southwest Airlines Co.,,12,WN,13.332377391
+Southwest Airlines Co.,,11,WN,11.325138174
+Southwest Airlines Co.,,10,WN,12.844524511
+Southwest Airlines Co.,,9,WN,11.895011072
+Southwest Airlines Co.,,8,WN,10.894714316
+Southwest Airlines Co.,,7,WN,12.039961575
+Southwest Airlines Co.,,6,WN,10.186793327
+Southwest Airlines Co.,,5,WN,9.707119080
+Southwest Airlines Co.,,4,WN,11.019735064
+Southwest Airlines Co.,,3,WN,10.390678842
+Southwest Airlines Co.,,2,WN,10.118085962
+Southwest Airlines Co.,,1,WN,10.445792191
+Frontier Airlines Inc.,,12,F9,15.544129892
+Frontier Airlines Inc.,,11,F9,18.976973684
+Frontier Airlines Inc.,,10,F9,20.414551607
+Frontier Airlines Inc.,,9,F9,19.055961071
+Frontier Airlines Inc.,,8,F9,17.662262593
+Frontier Airlines Inc.,,7,F9,14.057939914
+Frontier Airlines Inc.,,6,F9,12.729789590
+Frontier Airlines Inc.,,5,F9,12.967136150
+Frontier Airlines Inc.,,4,F9,15.645013724
+Frontier Airlines Inc.,,3,F9,13.111373011
+Frontier Airlines Inc.,,2,F9,17.814840499
+Frontier Airlines Inc.,,1,F9,17.052489906
+Continental Airlines,,12,CO,19.180418535
+Continental Airlines,,11,CO,16.389189189
+Continental Airlines,,10,CO,18.177676538
+Continental Airlines,,9,CO,23.330097087
+Continental Airlines,,8,CO,17.184050179
+Continental Airlines,,7,CO,18.328865396
+Continental Airlines,,6,CO,15.629580574
+Continental Airlines,,5,CO,15.393993994
+Continental Airlines,,4,CO,15.766988210
+Continental Airlines,,3,CO,16.606153846
+Continental Airlines,,2,CO,15.267306627
+Continental Airlines,,1,CO,15.295198053
+Express Jet,,12,XE,15.714212766
+Express Jet,,11,XE,13.430346386
+Express Jet,,10,XE,14.286959329
+Express Jet,,9,XE,18.893572621
+Express Jet,,8,XE,21.316951270
+Express Jet,,7,XE,17.276202749
+Express Jet,,6,XE,17.382215471
+Express Jet,,5,XE,15.172635298
+Express Jet,,4,XE,15.539674797
+Express Jet,,3,XE,19.467949461
+Express Jet,,2,XE,15.466207846
+Express Jet,,1,XE,15.377529057
+American Eagle Airlines Inc.,,12,MQ,17.544797264
+American Eagle Airlines Inc.,,11,MQ,17.808377690
+American Eagle Airlines Inc.,,10,MQ,21.447626419
+American Eagle Airlines Inc.,,9,MQ,19.978091728
+American Eagle Airlines Inc.,,8,MQ,18.317400722
+American Eagle Airlines Inc.,,7,MQ,17.588904364
+American Eagle Airlines Inc.,,6,MQ,15.418682089
+American Eagle Airlines Inc.,,5,MQ,17.562886869
+American Eagle Airlines Inc.,,4,MQ,18.774960380
+American Eagle Airlines Inc.,,3,MQ,17.034243864
+American Eagle Airlines Inc.,,2,MQ,16.736501277
+American Eagle Airlines Inc.,,1,MQ,16.380253310
+JetBlue Airways,,12,B6,24.414466624
+JetBlue Airways,,11,B6,16.025
+JetBlue Airways,,10,B6,22.422186752
+JetBlue Airways,,9,B6,17.422612514
+JetBlue Airways,,8,B6,24.819860930
+JetBlue Airways,,7,B6,19.618820468
+JetBlue Airways,,6,B6,13.224744898
+JetBlue Airways,,5,B6,13.833710920
+JetBlue Airways,,4,B6,13.641979642
+JetBlue Airways,,3,B6,13.540526720
+JetBlue Airways,,2,B6,13.808174387
+JetBlue Airways,,1,B6,15.004033737
+United Air Lines Inc.,,12,UA,18.098493627
+United Air Lines Inc.,,11,UA,21.160615742
+United Air Lines Inc.,,10,UA,20.497534247
+United Air Lines Inc.,,9,UA,18.152304999
+United Air Lines Inc.,,8,UA,19.074661964
+United Air Lines Inc.,,7,UA,17.830368677
+United Air Lines Inc.,,6,UA,17.506109325
+United Air Lines Inc.,,5,UA,16.083678334
+United Air Lines Inc.,,4,UA,17.867558184
+United Air Lines Inc.,,3,UA,17.152772892
+United Air Lines Inc.,,2,UA,17.200579524
+United Air Lines Inc.,,1,UA,18.913820090
+US Airways Inc.,,12,US,17.387954977
+US Airways Inc.,,11,US,16.136029412
+US Airways Inc.,,10,US,21.623900293
+US Airways Inc.,,9,US,19.209570481
+US Airways Inc.,,8,US,20.221422697
+US Airways Inc.,,7,US,19.643554526
+US Airways Inc.,,6,US,18.107587581
+US Airways Inc.,,5,US,18.802773129
+US Airways Inc.,,4,US,20.133188248
+US Airways Inc.,,3,US,19.050080200
+US Airways Inc.,,2,US,16.364839953
+US Airways Inc.,,1,US,16.561383929
+Skywest Airlines Inc.,,12,OO,13.896816954
+Skywest Airlines Inc.,,11,OO,11.342644740
+Skywest Airlines Inc.,,10,OO,13.110890598
+Skywest Airlines Inc.,,9,OO,20.148234201
+Skywest Airlines Inc.,,8,OO,20.318708757
+Skywest Airlines Inc.,,7,OO,20.751095890
+Skywest Airlines Inc.,,6,OO,17.793026793
+Skywest Airlines Inc.,,5,OO,17.110567686
+Skywest Airlines Inc.,,4,OO,18.438476391
+Skywest Airlines Inc.,,3,OO,22.424079942
+Skywest Airlines Inc.,,2,OO,20.350319117
+Skywest Airlines Inc.,,1,OO,22.320903858
+Delta Air Lines Inc.,,12,DL,17.226110065
+Delta Air Lines Inc.,,11,DL,15.490683230
+Delta Air Lines Inc.,,10,DL,17.691869060
+Delta Air Lines Inc.,,9,DL,20.589518328
+Delta Air Lines Inc.,,8,DL,21.665970101
+Delta Air Lines Inc.,,7,DL,23.456309591
+Delta Air Lines Inc.,,6,DL,17.368296749
+Delta Air Lines Inc.,,5,DL,21.226025537
+Delta Air Lines Inc.,,4,DL,20.349651538
+Delta Air Lines Inc.,,3,DL,19.295647695
+Delta Air Lines Inc.,,2,DL,19.098292220
+Delta Air Lines Inc.,,1,DL,21.322168725
+Alaska Airlines Inc.,,12,AS,18.079243051
+Alaska Airlines Inc.,,11,AS,18.339531680
+Alaska Airlines Inc.,,10,AS,22.949280848
+Alaska Airlines Inc.,,9,AS,21.306550218
+Alaska Airlines Inc.,,8,AS,18.421428571
+Alaska Airlines Inc.,,7,AS,18.197455024
+Alaska Airlines Inc.,,6,AS,19.436388509
+Alaska Airlines Inc.,,5,AS,22.753119913
+Alaska Airlines Inc.,,4,AS,24.170461538
+Alaska Airlines Inc.,,3,AS,22.123755334
+Alaska Airlines Inc.,,2,AS,20.180319680
+Alaska Airlines Inc.,,1,AS,18.876084263
+American Airlines Inc.,,12,AA,21.445271780
+American Airlines Inc.,,11,AA,25.871789958
+American Airlines Inc.,,10,AA,26.770238495
+American Airlines Inc.,,9,AA,24.275303644
+American Airlines Inc.,,8,AA,22.738843255
+American Airlines Inc.,,7,AA,22.398049786
+American Airlines Inc.,,6,AA,19.292824944
+American Airlines Inc.,,5,AA,19.648373187
+American Airlines Inc.,,4,AA,21.997968231
+American Airlines Inc.,,3,AA,21.198389458
+American Airlines Inc.,,2,AA,19.926107631
+American Airlines Inc.,,1,AA,18.388351750
+Aloha Airlines,,2,AQ,24.009090909
+Aloha Airlines,,1,AQ,24.786956522
+Endeavor Air,,12,9E,24.079534618
+Endeavor Air,,11,9E,24.147374062
+Endeavor Air,,10,9E,26.160648489
+Endeavor Air,,9,9E,28.069692058
+Endeavor Air,,8,9E,24.116999312
+Endeavor Air,,7,9E,25.873698506
+Endeavor Air,,6,9E,23.355057705
+Endeavor Air,,5,9E,23.756028369
+Endeavor Air,,4,9E,25.332888592
+Endeavor Air,,3,9E,24.576306620
+Endeavor Air,,2,9E,26.568083432
+Endeavor Air,,1,9E,29.000424178
+Northwest Airlines,,12,NW,21.647444089
+Northwest Airlines,,11,NW,29.254882813
+Northwest Airlines,,10,NW,32.812016657
+Northwest Airlines,,9,NW,33.115486961
+Northwest Airlines,,8,NW,32.050445104
+Northwest Airlines,,7,NW,25.911318795
+Northwest Airlines,,6,NW,25.717177169
+Northwest Airlines,,5,NW,28.706629707
+Northwest Airlines,,4,NW,31.148763681
+Northwest Airlines,,3,NW,27.303669725
+Northwest Airlines,,2,NW,25.368957941
+Northwest Airlines,,1,NW,24.752113194
+Comair,,12,OH,33.192678704
+Comair,,11,OH,24.000528262
+Comair,,10,OH,28.470633105
+Comair,,9,OH,25.829916123
+Comair,,8,OH,25.428764897
+Comair,,7,OH,27.718075928
+Comair,,6,OH,26.421260758
+Comair,,5,OH,23.152035116
+Comair,,4,OH,25.727363849
+Comair,,3,OH,30.334639318
+Comair,,2,OH,25.971928097
+Comair,,1,OH,27.363258026
+Atlantic Southeast Airlines,,12,EV,16.820516672
+Atlantic Southeast Airlines,,11,EV,17.413919414
+Atlantic Southeast Airlines,,10,EV,19.501730104
+Atlantic Southeast Airlines,,9,EV,40.558346840
+Atlantic Southeast Airlines,,8,EV,39.395526899
+Atlantic Southeast Airlines,,7,EV,26.978438910
+Atlantic Southeast Airlines,,6,EV,30.431898067
+Atlantic Southeast Airlines,,5,EV,32.900033772
+Atlantic Southeast Airlines,,4,EV,31.583793738
+Atlantic Southeast Airlines,,3,EV,33.816621803
+Atlantic Southeast Airlines,,2,EV,34.096465921
+Atlantic Southeast Airlines,,1,EV,37.490418298
+Hawaiian Airlines Inc.,,12,HA,32.367154812
+Hawaiian Airlines Inc.,,11,HA,36.371212121
+Hawaiian Airlines Inc.,,10,HA,33.501204819
+Hawaiian Airlines Inc.,,9,HA,40.150602410
+Hawaiian Airlines Inc.,,8,HA,39.431578947
+Hawaiian Airlines Inc.,,7,HA,24.689655172
+Hawaiian Airlines Inc.,,6,HA,32.62
+Hawaiian Airlines Inc.,,5,HA,42.063888889
+Hawaiian Airlines Inc.,,4,HA,30.632398754
+Hawaiian Airlines Inc.,,3,HA,45.171052632
+Hawaiian Airlines Inc.,,2,HA,34.715151515
+Hawaiian Airlines Inc.,,1,HA,35.739436620
+Mesa Airlines,,12,YV,39.853426519
+Mesa Airlines,,11,YV,31.865944735
+Mesa Airlines,,10,YV,36.086335605
+Mesa Airlines,,9,YV,35.828264758
+Mesa Airlines,,8,YV,38.396665849
+Mesa Airlines,,7,YV,37.337023832
+Mesa Airlines,,6,YV,40.346895075
+Mesa Airlines,,5,YV,35.769091847
+Mesa Airlines,,4,YV,35.723964294
+Mesa Airlines,,3,YV,37.17
+Mesa Airlines,,2,YV,38.706400839
+Mesa Airlines,,1,YV,39.710047640

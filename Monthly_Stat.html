@@ -1,0 +1,501 @@
+<doctype html>
+<html>
+<head>  
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<style> 
+.bar {
+    fill: #6C3483;
+}
+
+rect:hover{
+    fill: #6C3483;
+	fill-opacity: 0.8;
+}
+
+.bar:hover {
+    fill: #6C3483;
+	fill-opacity: 0.8;
+}
+.axis {
+    font: 15px sans-serif;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.x.axis path {
+    display: none;
+}
+
+.button {
+  padding: 15px 20px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #6C3483;
+  opacity: 0.5;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #6C3483; opacity: 0.8;}
+
+.button:active {
+  background-color: #6C3483; 
+  opacity: 0.8;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  
+}
+</style>
+<body background="../images/4.jpg">
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<div id="buttons" align="bottom-right">
+<form>
+		<input class="button" value="Homepage" onclick="window.location.href='index.html'" />
+		<input class="button" value="Weekly Stats" onclick="window.location.href='Weekly_Stat.html'" />
+		<input class="button" value="Monthly Stats" onclick="window.location.href='Monthly_Stat.html'" />
+		</form>
+        </div>
+<div class="section" id="sectionImage1" style="width:100%; height:70%; padding-top:2%; padding-left:3%; padding-right:1.5%;">
+				<div style="float: left; width: 70%;">
+					<div style="font-size: 60px; font-weight: bold; color:#1a1a1a;">Flight Stats over weekdays and months</br></br></div>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What does the visualization show? </div></br>
+					The chart show how the flight volume varies over seven days of a week and twelve months of a year. Data has been presented as is without any truncation.
+					X axis represent 12 months of a month and 7 days of a week as per selection and Y axis represent flight volume; note that it scales automatically on user input. One unique hue has been used across the bars. 
+					Charts shows the cumulative aggregate by default but we also have the option to filter down to individual airliner.</br></br>
+					A lookup table has also been included for reference on the right to obtain IATA Code of an Airliner for data filtering</br></br>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What are the user interactions available? </div></br>
+					1.	Viewer can toggle between weekly and monthly data</br>
+					2.	Viewer can filter the data to note details for a single airliner</br>
+					3.	Tooltips reveal flight volume when we hover over a bar</br>
+					4.  You can navigate to other charts by clicking on homepage</br>
+					5.  A reset button has been included to retore defaults</br>
+					</br>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What inference/s can be drawn? </div></br>
+					1.	Most of the Airliners operate lesser flights on Friday</br>
+					2.	Most of the Airliners operate lesser flights on the months of Sep, Oct & Nov</br>
+					3.	Southwest Airlines(WN) clearly seems to have beaten the rest when it comes to operating more flights</br>
+					</br>
+				</div>
+</div>				
+<div id="buttons" align="bottom-right">
+        <button class="button" id="data1">CO</button>
+		
+        <button class="button" id="data2">UA</button>
+		
+		<button class="button" id="data3">AA</button>
+		
+        <button class="button" id="data4">US</button>
+		
+		<button class="button" id="data5">F9</button>
+		
+        <button class="button" id="data6">B6</button>
+		
+		<button class="button" id="data7">OO</button>
+		
+        <button class="button" id="data8">AS</button>
+		
+		<button class="button" id="data9">WN</button>
+		
+		<button class="button" id="data10">DL</button>
+		
+        <button class="button" id="data11">EV</button>
+		
+		<button class="button" id="data12">HA</button>
+		
+        <button class="button" id="data13">MQ</button>
+		
+		<button class="button" id="data14">AQ</button>
+		
+		<button class="button" id="data15">9E</button>
+		
+        <button class="button" id="data16">OH</button>
+		
+		<button class="button" id="data17">YV</button>
+		
+        <button class="button" id="data18">FL</button>
+		
+		<button class="button" id="data19">XE</button>
+		
+        <button class="button" id="data20">NW</button>
+		
+        <button class="button" id="data21">Reset</button>
+		<br>
+		<br>
+        </div>
+<div>
+<script>
+var margin = {
+    top: 50,
+    right: 30,
+    bottom: 40,
+    left: 70
+}, width = 800 - margin.left - margin.right,  height = 800 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal().rangeRoundBands([0, width - margin.right - margin.left],0.1);
+var y = d3.scale.linear().range([height, 0]);
+
+var selection=["None"];
+	
+d3.select("#data1")
+        .on("click", function() {
+			selection=[];
+            selection.push("CO");
+			updateData();
+			});
+			
+d3.select("#data2")
+        .on("click", function() {
+			selection=[];
+            selection.push("UA");
+			updateData();
+			});
+			
+d3.select("#data3")
+        .on("click", function() {
+			selection=[];
+            selection.push("AA");
+			updateData();
+			});
+			
+d3.select("#data4")
+        .on("click", function() {
+			selection=[];
+            selection.push("US");
+			updateData();
+			});
+			
+d3.select("#data5")
+        .on("click", function() {
+			selection=[];
+            selection.push("F9");
+			updateData();
+			});
+			
+d3.select("#data6")
+        .on("click", function() {
+			selection=[];
+            selection.push("B6");
+			updateData();
+			});
+			
+d3.select("#data7")
+        .on("click", function() {
+			selection=[];
+            selection.push("OO");
+			updateData();
+			});
+			
+d3.select("#data8")
+        .on("click", function() {
+			selection=[];
+            selection.push("AS");
+			updateData();
+			});
+			
+d3.select("#data9")
+        .on("click", function() {
+			selection=[];
+            selection.push("WN");
+			updateData();
+			});
+			
+d3.select("#data10")
+        .on("click", function() {
+			selection=[];
+            selection.push("DL");
+			updateData();
+			});
+			
+d3.select("#data11")
+        .on("click", function() {
+			selection=[];
+            selection.push("EV");
+			updateData();
+			});
+			
+d3.select("#data12")
+        .on("click", function() {
+			selection=[];
+            selection.push("HA");
+			updateData();
+			});
+			
+d3.select("#data13")
+        .on("click", function() {
+			selection=[];
+            selection.push("MQ");
+			updateData();
+			});
+			
+			
+d3.select("#data14")
+        .on("click", function() {
+			selection=[];
+            selection.push("AQ");
+			updateData();
+			});
+			
+d3.select("#data15")
+        .on("click", function() {
+			selection=[];
+            selection.push("9E");
+			updateData();
+			});
+			
+d3.select("#data16")
+        .on("click", function() {
+			selection=[];
+            selection.push("OH");
+			updateData();
+			});
+			
+d3.select("#data17")
+        .on("click", function() {
+			selection=[];
+            selection.push("YV");
+			updateData();
+			});
+			
+d3.select("#data18")
+        .on("click", function() {
+			selection=[];
+            selection.push("FL");
+			updateData();
+			});
+			
+d3.select("#data19")
+        .on("click", function() {
+			selection=[];
+            selection.push("XE");
+			updateData();
+			});
+			
+d3.select("#data20")
+        .on("click", function() {
+			selection=[];
+            selection.push("NW");
+			updateData();
+			});
+			
+d3.select("#data21")
+        .on("click", function() {
+            selection.push("CO","UA","AA","US","F9","B6","OO","AS","WN","DL","EV","HA","MQ","AQ","9E","OH","YV","FL","XE","NW");
+			updateData();
+			});
+			
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+	
+
+var svg = d3.select("body").append("svg")
+    .attr("width", height + margin.left + margin.right)
+    .attr("height", width + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
+	
+d3.csv("/data/Week_Month_UQ_FULL.csv", function (error, data) {
+    if (error) throw error;
+	var month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // initializes twelve values for twelve months of year
+    data.forEach(function (d) {
+	if (!selection.includes(d.UniqueCarrier)) {
+		if (d.Month == 1) {
+            month[0]++;
+        } else if (d.Month == 2) {
+            month[1]++;
+        } else if (d.Month == 3) {
+            month[2]++;
+        } else if (d.Month == 4) {
+            month[3]++;
+        } else if (d.Month == 5) {
+            month[4]++;
+        } else if (d.Month == 6) {
+            month[5]++;
+        } else if (d.Month == 7) {
+            month[6]++;
+        } else if (d.Month == 8) {
+            month[7]++;
+        } else if (d.Month == 9) {
+            month[8]++;
+        } else if (d.Month == 10) {
+            month[9]++;
+        } else if (d.Month == 11) {
+            month[10]++;
+        } else if (d.Month == 12) {
+            month[11]++;
+        }
+		}
+    });
+    console.log("Month:");
+    for (index = 0; index < month.length; index++) {
+        console.log(month[index]);
+    }
+	console.log("Most flights in a month:", Math.max.apply(Math, month));
+	
+	x.domain(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
+    y.domain([0, Math.max.apply(Math, month) + 1000]);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Number of Flights");
+
+    svg.selectAll(".bar")
+        .data(month)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+        .attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+        .attr("y", y)
+        .attr("height", function (d) {
+        return height - y(d);
+    }
+	)
+		.append("svg:title")
+          .text(function(d) { return "Flight Count:" + d; });
+		
+		  
+});
+
+d3.csv("/data/airlines.csv", function (data) {
+	var canvas= d3.select("body").append("svg")
+		.attr("width", 1000)
+		.attr("height", 800 - margin.top - margin.bottom)
+		
+		canvas.selectAll("rect")
+		.data(data)
+		.enter()
+			.append("rect")
+			.attr("width", 400)
+			.attr("height", 30)
+			.attr("x",650)
+			.attr("y", function (d, i) { return i * 30 + 5; })
+			.attr("fill", "#6C3483")
+			.attr("fill-opacity",0.5)
+			.transition()
+			.duration(300)
+			
+		canvas.selectAll("text")
+		.data(data)
+		.enter()
+			.append("text")
+			.attr("fill","white")
+			.attr("font","Arial")
+			.attr("font-weight","bold")
+			.attr("x",650)
+			.attr("y", function (d, i) { return i * 30 + 20; })
+			.text(function (d) {return d.AIRLINE +' --> '+ d.IATA_CODE; })
+})
+
+
+function updateData() {
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+	
+	
+d3.csv("/data/Week_Month_UQ_FULL.csv", function (error, data) {
+    if (error) throw error;
+	var month = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // initializes twelve values for twelve months of year
+    data.forEach(function (d) {
+	if (selection.includes(d.UniqueCarrier)) {
+		if (d.Month == 1) {
+            month[0]++;
+        } else if (d.Month == 2) {
+            month[1]++;
+        } else if (d.Month == 3) {
+            month[2]++;
+        } else if (d.Month == 4) {
+            month[3]++;
+        } else if (d.Month == 5) {
+            month[4]++;
+        } else if (d.Month == 6) {
+            month[5]++;
+        } else if (d.Month == 7) {
+            month[6]++;
+        } else if (d.Month == 8) {
+            month[7]++;
+        } else if (d.Month == 9) {
+            month[8]++;
+        } else if (d.Month == 10) {
+            month[9]++;
+        } else if (d.Month == 11) {
+            month[10]++;
+        } else if (d.Month == 12) {
+            month[11]++;
+        }
+		}
+    });
+    console.log("Month:");
+    for (index = 0; index < month.length; index++) {
+        console.log(month[index]);
+    }
+	console.log("Most flights in a month:", Math.max.apply(Math, month));
+	
+	x.domain(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
+	y.domain([0, Math.max.apply(Math, month) + 1000]);
+	svg.selectAll('g').remove();
+	svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Number of Flights");
+		
+	svg.selectAll(".bar").remove();
+    svg.selectAll(".bar")
+        .data(month)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+        .attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+        .attr("y", y)
+        .attr("height", function (d) {
+        return height - y(d);
+    }
+	)
+		.append("svg:title")
+          .text(function(d) { return "Flight Count:" + d; }); 
+		});
+		}
+</script>
+</div>
+</body>
+</html>

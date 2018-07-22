@@ -1,0 +1,400 @@
+<doctype html>
+<html>
+<head>  
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<style> 
+.bar {
+    fill: #6C3483;
+}
+
+rect:hover{
+    fill: #6C3483;
+	fill-opacity: 0.8;
+}
+
+.bar:hover {
+    fill: #6C3483;
+	fill-opacity: 0.8;
+}
+.axis {
+    font: 15px sans-serif;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.x.axis path {
+    display: none;
+}
+
+.button {
+  padding: 15px 20px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #6C3483;
+  opacity: 0.5;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #6C3483; opacity: 0.8;}
+
+.button:active {
+  background-color: #6C3483; 
+  opacity: 0.8;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  
+}
+</style>
+<body background="/images/3.jpg">
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<div id="buttons1" align="bottom-right">
+<form>
+		<input class="button" value="Homepage" onclick="window.location.href='index.html'" />
+		</form>
+</div>
+<div class="section" id="sectionImage1" style="width:100%; height:70%; padding-top:2%; padding-left:3%; padding-right:1.5%;">
+				<div style="float: left; width: 75%;">
+					<div style="font-size: 60px; font-weight: bold; color:#1a1a1a;">Airport Load Rankings and the impact of Weather Delays</br></br></div>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What does the visualization show? </div></br>
+					The chart show how the twenty four major US Airports perform & rank across below metrics for Domestic Operations:</br></br>
+					1. Ranking on the basis of their annual domestic flight operations</br>
+					2. How much they are tolerant to weather delays</br></br>
+					Data has been truncated to showcase details only for a relevant set of 24 major airports for ease of visualization and scalability. X axis represent the set of 24 airliners and Y axis represent average weather delay in minutes or number of flights operated annually as per user selection; 
+					it also scales automatically on user input. One unique hue has been used across the bars. 
+					Chart shows ranking on average weather delay in minutes by default</br></br>
+					
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What are the user interactions available? </div></br>
+					1.	Viewer can toggle between the ranking on air traffic volume and their weather delays by clicking the animated buttons</br>
+					2.  A helpful natural logarithmic scale has been included for only air-traffic volume aiding in better visualization</br>
+					3.	Tooltips reveal values represented across Y-axis as per viewer selection (when we hover over a bar)</br>
+					4.  You can navigate to other charts by clicking on homepage</br>
+					5.  Viewer often needs to refer the lookup added on the right for airport IATA_CODE; an extra effort deliberately included to make us (The Fliers)
+					aware about these acronyms as they come in pretty handy for flight booking</br>
+					</br>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What inference/s can be drawn? </div></br>
+					1.	ATL & ORD certainly seems to be the busiest airports with more than 120K annual flight volume</br>
+					2.	Busier Airports seems to be least impacted by weather delays (less than six minutes of average delay) while almost all of the airports having
+					an average weather delay of ten minutes and more appear to operate less than 500 flights an year</br>
+					3.  Better weather conditions (ex: ATL, DFW) and efficient air-strip maintenance even with longer severe winter condition (ex: ORD, DEN) seems to be few of the differentiating factors</br>
+					4.	With an average weather delay of less than two minutes and a decent flight traffic foot print; Airports along the West Coast (ex: LAX, LAS & SFO) clealry seems to be performing pretty efficient</br>
+					5.  We highly encourage the viewers to exploit and bring out more such hidden but interesting analogies</br>
+									
+				</div>
+</div>
+<div id="buttons2" align="bottom-right">
+		</br></br>
+					</br>
+					</br>
+					</br>
+					</br>
+		<button class="button" id="data1">Flight Volume Linear Scale</button>
+		<button class="button" id="data3">Flight Volume Log Scale</button>
+		</br>
+		</br>
+		<button class="button" id="data2">Check Average Weather Delay</button>
+</div>
+<script>
+var margin = {
+    top: 50,
+    right: 30,
+    bottom: 140,
+    left: 120
+}, width = 800 - margin.left - margin.right,  height = 800 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal().rangeBands([0, width - margin.right - margin.left],0.01,0.01);
+var y = d3.scale.linear().range([height, 0]);
+
+var selection=["None"];
+
+d3.select("#data1")
+        .on("click", function() {
+			updateData(y);
+			});
+			
+d3.select("#data2")
+        .on("click", function() {
+			location.reload();
+			});
+			
+d3.select("#data3")
+        .on("click", function() {
+			var y = d3.scale.log().base(Math.E).range([height, 0]);
+			updateData(y);
+			});
+	
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+	
+var svg = d3.select("body").append("svg")
+    .attr("width", height + margin.left + margin.right)
+    .attr("height", width + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); 
+	
+d3.csv("/data/Airports_data.csv", function (error, data) {
+    if (error) throw error;
+	var airport = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]; // initializes twenty four values for 
+    data.forEach(function (d) {
+	//if (selection.includes(d.UniqueCarrier)) {
+		if (d.Airport_Code == "ATL") {
+            airport[0]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'ORD') {
+            airport[1]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'DFW') {
+            airport[2]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'LAX') {
+            airport[3]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'LAS') {
+            airport[4]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'EWR') {
+            airport[5]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'SFO') {
+            airport[6]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'SEA') {
+            airport[7]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'DTW') {
+            airport[8]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'JFK') {
+            airport[9]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'MSP') {
+            airport[10]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'IAD') {
+            airport[11]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'SDF') {
+            airport[12]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'TYS') {
+            airport[13]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'ASE') {
+            airport[14]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'DRO') {
+            airport[15]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'LAW') {
+            airport[16]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'TWF') {
+            airport[17]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'TXK') {
+            airport[18]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'LCH') {
+            airport[19]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'SCE') {
+            airport[20]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'CMX') {
+            airport[21]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'BPT') {
+            airport[22]=d.Avg_weather_delay;
+        } else if (d.Airport_Code == 'BLI') {
+            airport[23]=d.Avg_weather_delay;
+        } 
+		//}
+    });
+    console.log("Airport:");
+    for (index = 0; index < airport.length; index++) {
+        console.log(airport[index]);
+    }
+	console.log("Max Avg. weather delay:", Math.max.apply(Math, airport));
+	
+	x.domain(["ATL", "ORD", "DFW", "LAX", "LAS", "EWR", "SFO", "SEA", "DTW", "JFK", "MSP", "IAD", "SDF", "TYS", "ASE", "DRO", "LAW", "TWF", "TXK", "LCH", "SCE", "CMX", "BPT", "BLI"]);
+    y.domain([0.1, Math.max.apply(Math, airport) + 10]);
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		.selectAll("text")
+		.attr("y", 0)
+		.attr("x", 9)
+		.attr("dy", ".35em")
+		.attr("transform", "rotate(90)")
+		.style("text-anchor", "start");
+
+    svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Avg_weather_delay");
+
+    svg.selectAll(".bar")
+        .data(airport)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+        .attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+        .attr("y", y)
+        .attr("height", function (d) {
+        return height - y(d);
+    }
+	)
+		.append("svg:title")
+          .text(function(d) { return "Avg. weather delay:" + d +" minutes"; });
+		
+		  
+});
+
+d3.csv("/data/airports.csv", function (data) {
+	var canvas= d3.select("body").append("svg")
+		.attr("width", 1000)
+		.attr("height", 1000 - margin.top - margin.bottom);
+		
+		canvas.selectAll("rect")
+		.data(data)
+		.enter()
+			.append("rect")
+			.attr("width", 500)
+			.attr("height", 30)
+			.attr("x",600)
+			.attr("y", function (d, i) { return i * 30 + 5; })
+			.attr("fill", "#6C3483")
+			.attr("fill-opacity",0.5)
+			.transition()
+			.duration(300)
+			
+		canvas.selectAll("text")
+		.data(data)
+		.enter()
+			.append("text")
+			.attr("fill","white")
+			.attr("font","Arial")
+			.attr("font-weight","bold")
+			.attr("x",600)
+			.attr("y", function (d, i) { return i * 30 +20; })
+			.text(function (d) {return d.AIRPORT + ' --> '+ d.IATA_CODE; })
+})
+
+function updateData(y) {
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+	
+d3.csv("/data/Airports_data.csv", function (error, data) {
+    if (error) throw error;
+	var airport = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // initializes twenty four values for 
+    data.forEach(function (d) {
+	//if (selection.includes(d.UniqueCarrier)) {
+		if (d.Airport_Code == 'ATL') {
+            airport[0]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'ORD') {
+            airport[1]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'DFW') {
+            airport[2]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'LAX') {
+            airport[3]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'LAS') {
+            airport[4]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'EWR') {
+            airport[5]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'SFO') {
+            airport[6]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'SEA') {
+            airport[7]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'DTW') {
+            airport[8]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'JFK') {
+            airport[9]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'MSP') {
+            airport[10]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'IAD') {
+            airport[11]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'SDF') {
+            airport[12]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'TYS') {
+            airport[13]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'ASE') {
+            airport[14]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'DRO') {
+            airport[15]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'LAW') {
+            airport[16]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'TWF') {
+            airport[17]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'TXK') {
+            airport[18]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'LCH') {
+            airport[19]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'SCE') {
+            airport[20]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'CMX') {
+            airport[21]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'BPT') {
+            airport[22]=d.NumberOfFlights;
+        } else if (d.Airport_Code == 'BLI') {
+            airport[23]=d.NumberOfFlights;
+        } 
+		//}
+    });
+    console.log("Airport:");
+    for (index = 0; index < airport.length; index++) {
+        console.log(airport[index]);
+    }
+	console.log("Most flights in an airport:", Math.max.apply(Math, airport));
+	
+	x.domain(["ATL", "ORD", "DFW", "LAX", "LAS", "EWR", "SFO", "SEA", "DTW", "JFK", "MSP", "IAD", "SDF", "TYS", "ASE", "DRO", "LAW", "TWF", "TXK", "LCH", "SCE", "CMX", "BPT", "BLI"]);
+    y.domain([0.1, Math.max.apply(Math, airport) + 10000]);
+	svg.selectAll('g').remove();
+	svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		.selectAll("text")
+		.attr("y", 0)
+		.attr("x", 9)
+		.attr("dy", ".35em")
+		.attr("transform", "rotate(90)")
+		.style("text-anchor", "start");
+
+    svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Annual Flight Traffic");
+	svg.selectAll(".bar").remove();
+    svg.selectAll(".bar")
+        .data(airport)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+        .attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+        .attr("y", y)
+        .attr("height", function (d) {
+        return height - y(d);
+    }
+	)
+		.append("svg:title")
+          .text(function(d) { return "Flight Count:" + d; });
+				  
+});
+} 
+</script>
+
+</body>
+</html>

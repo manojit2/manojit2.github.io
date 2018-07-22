@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<head>
+
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+<script src="https://d3js.org/d3.v3.min.js"></script>
+
+  <style>
+.bar {
+    fill: #6C3483;
+}
+
+rect:hover{
+    fill: #6C3483;
+	fill-opacity: 0.8;
+}
+
+title:
+
+.bar:hover {
+    fill: #6C3483;
+	fill-opacity: 0.8;
+}
+.axis {
+    font: 15px sans-serif;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+    .y path, .y stroke, .y line {
+      display: none;
+    }
+
+    .x path, .x stroke {
+      display: none;
+    }
+
+.button {
+  padding: 15px 20px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #6C3483;
+  opacity: 0.5;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #6C3483; opacity: 0.8;}
+
+.button:active {
+  background-color: #6C3483; 
+  opacity: 0.8;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);}
+  
+}
+</style>
+
+</head>
+<body background="/images/3.jpg">
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<div id="buttons1" align="bottom-right">
+<form>
+		<input class="button" value="Homepage" onclick="window.location.href='index.html'" />
+		</form>
+        </div>
+<div class="section" id="sectionImage1" style="width:100%; height:70%; padding-top:2%; padding-left:3%; padding-right:1.5%;">
+				<div style="float: left; width: 45%;">
+					<div style="font-size: 60px; font-weight: bold; color:#1a1a1a;">Airliner Rankings</br></br></div>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What does the visualization show? </div></br>
+					The chart show how the twenty Airliners perform & rank across three metrics:</br></br>
+					1. Ranking on the basis of average carrier delay</br>
+					2. Ranking on the basis of annual flight volume</br>
+					3. Ranking on the basis of annual air miles</br></br>
+					Data has been presented as is without any truncation. X axis represent a set of 20 airliners and Y axis represent average carrier delay in minutes or number of flights operated annually or annual air miles as per user selection; 
+					it also scales automatically on user input. One unique hue has been used across the bars. 
+					Chart shows ranking on average carrier delay by default</br></br>
+					
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What are the user interactions available? </div></br>
+					1.	Viewer can toggle among ranking metrics based upon carrier delays, flight volume & air miles</br>
+					2.	Tooltips reveal values represented across Y-axis as per user selection (when we hover over a bar)</br>
+					3.  You can navigate to other charts by clicking on homepage</br>
+					</br>
+					<div style="font-size: 20px; font-weight: bold; color:#1a1a1a;">What inference/s can be drawn? </div></br>
+					1.	Though AirTran has the least average carrier delays but overall Southwest Airlines clearly seems to lead the race when it comes to operating more flights over greater airmiles and minimal delay</br>
+					2.	Mesa & Hawaiian Airlines, with average delays over 30 minutes ceratinly needs immediate attention to review their flight operations </br>
+					3.	The charts can be used for interesting comparative study. For example Atlantic SE and Northwest Airlines seems to operate almost equal volume of flights 
+					but if you check their annual airmiles; Atlantic SE only seems to have travelled half of Northwest's miles; an indication that the later must have been 
+					operating more long-route flights in comparison to the former</br>
+					4.  We highly encourage the viewers to exploit and bring out more such hidden but interesting analogies</br>
+					</br>
+				</div>
+</div>
+<div id="buttons2" align="bottom-right">
+        <button class="button" id="data1">Ranking by Avg. Carrier Delay</button>
+		<button class="button" id="data2">Ranking by Annual Flight Volume</button>
+		<button class="button" id="data3">Ranking by Annual Air Miles</button>
+</div>
+
+  <script>
+
+    var margin = {
+    top: 50,
+    right: 30,
+    bottom: 140,
+    left: 120
+}, width = 800 - margin.left - margin.right,  height = 800 - margin.top - margin.bottom;
+    
+	var x = d3.scale.ordinal().rangeBands([0, width - margin.right - margin.left],0.01,0.01);
+    var y = d3.scale.linear().range([height, 0]);
+	
+	var selection=["None"];
+	
+	d3.select("#data1")
+        .on("click", function() {
+			location.reload();
+			});
+			
+	d3.select("#data2")
+        .on("click", function() {
+			updateData_Volume();
+			});
+			
+	d3.select("#data3")
+        .on("click", function() {
+			updateData_Miles();
+			});
+	
+    
+
+var svg = d3.select("body").append("svg")
+    .attr("width", height + margin.left + margin.right)
+    .attr("height", width + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+    d3.csv("/data/CarrierRanks.csv", type, function(data) {
+      
+      data.sort(function(a, b) {
+        return a.AvgCarrierDelay - b.AvgCarrierDelay;
+      });
+
+      y.domain([0, d3.max(data, function(d) { return d.AvgCarrierDelay + 10; })]);
+
+      x.domain(data.map(function(d) { return d.Airline; }));
+
+	svg.selectAll('g').remove();
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		.selectAll("text")
+		.attr("y", 0)
+		.attr("x", 9)
+		.attr("dy", ".35em")
+		.attr("transform", "rotate(90)")
+		.style("text-anchor", "start");
+	  
+	  svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+		//.attr("transform", "translate("+ (padding/2) +","+(height/2)+")rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Avg. Carrier Delay (In Minutes)");
+
+      svg.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+		.attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d, i) {
+            return y(d.AvgCarrierDelay);
+        })
+		.attr("height", function (d) {
+        return height - y(d.AvgCarrierDelay);
+    }
+	)
+		  .append("svg:title")
+		  .text(function(d) { return "Avg. Carrier Delay (In Minutes):" + d.AvgCarrierDelay; });
+
+    });
+
+    function type(d) {
+      d.AvgCarrierDelay = +d.AvgCarrierDelay;
+      return d;
+    }
+	
+	function type1(d) {
+      d.NumberOfFlights = +d.NumberOfFlights;
+      return d;
+    }
+	
+	function type2(d) {
+      d.Airmiles = +d.Airmiles;
+      return d;
+    }
+	
+	function updateData_Volume() {
+	
+	
+		
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+    d3.csv("/data/CarrierRanks.csv", type1, function(data) {
+      
+      data.sort(function(a, b) {
+        return a.NumberOfFlights - b.NumberOfFlights;
+      });
+
+      y.domain([0, d3.max(data, function(d) { return d.NumberOfFlights + 10000; })]);
+
+      x.domain(data.map(function(d) { return d.Airline; }));
+
+	svg.selectAll('g').remove();
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		.selectAll("text")
+		.attr("y", 0)
+		.attr("x", 9)
+		.attr("dy", ".35em")
+		.attr("transform", "rotate(90)")
+		.style("text-anchor", "start");
+	  
+	  svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Annual Number Of Flights");
+	
+	  svg.selectAll(".bar").remove();
+      svg.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+		.attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+		.attr("y", function(d, i) {
+            return y(d.NumberOfFlights);
+        })
+		.attr("height", function (d) {
+        return height - y(d.NumberOfFlights);
+    }
+	)
+		  .append("svg:title")
+          .text(function(d) { return "Annual Flight Volume: " + d.NumberOfFlights; });
+
+    });	
+	}
+	
+function updateData_Miles() {
+	
+	
+		
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+    d3.csv("/data/CarrierRanks.csv", type2, function(data) {
+      
+      data.sort(function(a, b) {
+        return a.Airmiles - b.Airmiles;
+      });
+
+      y.domain([0, d3.max(data, function(d) { return d.Airmiles + 50000; })]);
+
+      x.domain(data.map(function(d) { return d.Airline; }));
+
+	svg.selectAll('g').remove();
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+		.selectAll("text")
+		.attr("y", 0)
+		.attr("x", 9)
+		.attr("dy", ".35em")
+		.attr("transform", "rotate(90)")
+		.style("text-anchor", "start");
+	  
+	  svg.append("g")
+        .attr("class", "y axis")
+		.call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0.1)
+        .style("text-anchor", "end")
+        .text("Annual Airmiles");
+	
+	  svg.selectAll(".bar").remove();
+      svg.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+		.attr("fill-opacity",0.5)
+        .attr("x", function (d, i) {
+        return x(x.domain()[i]);
+    })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d, i) {
+            return y(d.Airmiles);
+        })
+        .attr("height", function (d) {
+        return height - y(d.Airmiles);
+    }
+	)
+		  .append("svg:title")
+          .text(function(d) { return "Annual Air Miles: " + d.Airmiles; });
+
+    });	
+	}
+  </script>
+
+</body>

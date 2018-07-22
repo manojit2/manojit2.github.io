@@ -1,0 +1,102 @@
+As a part of the assignment I will be reviewing the US Domestic flight data of 2008 available on below link: https://www.kaggle.com/giovamata/airlinedelaycauses The data is collected from The U.S. Department of Transportation's (DOT) Bureau of Transportation Statistics (BTS) which tracks the on-time performance of domestic flights operated by large air carriers. I have divided my analysis into three separate dashboards focusing on traffic variations over weekdays/ months; airliners delay statistics and airports ranking in terms of traffic volume with tolerance to weather delays. Final data set has been prepared after performing joins on delayed flights summary, airports lookup & airline lookup sheets respectively. These joins helped in obtaining airport and airline details for IATA code to name transformations (For e.g. ORD stands for Ohare International Airport & AA stands for American Airlines). Details of two Join conditions are provided below: 1. Airport IATA codes of airports.csv with Origin/ Destination of delayed_flights.csv 2.	Airliner IATA codes of airlines.csv with unique carriers of delayed_flights.csv While the data in itself had multiple dimensions to consider I focused on below: •	Airliners air miles and flight counts over 7 days of a week (1-Monday to 7-Sunday) and 12 months of a year •	Airports ranking on the volume of operated air-traffic and their tolerance to weather delays
+
+
+2008 US Domestic Air Traffic Data Assessment:
+
+As a part of the assignment I will be reviewing the US Domestic flight data of 2008 available on below link: 
+
+https://www.kaggle.com/giovamata/airlinedelaycauses 
+
+The data is collected from The U.S. Department of Transportation's (DOT) Bureau of Transportation Statistics (BTS) which tracks the on-time performance of domestic flights operated by large air carriers.
+
+I have divided my analysis into three separate dashboards focusing on traffic variations over weekdays/ months; airliners delay statistics and airports ranking in terms of traffic volume with tolerance to weather delays. Final data set has been prepared after performing joins on delayed flights summary, airports lookup & airline lookup sheets respectively. These joins helped in obtaining airport and airline details for IATA code to name transformations (For e.g. ORD stands for Ohare International Airport & AA stands for American Airlines).
+
+Details of two Join conditions are provided below:
+
+1.      Airport IATA codes of airports.csv with Origin/ Destination of delayed_flights.csv
+
+2.      Airliner IATA codes of airlines.csv with unique carriers of delayed_flights.csv
+
+While the data in itself had multiple dimensions to consider I focused on below:
+
+·         Airliners air miles and flight counts over 7 days of a week (1-Monday to 7-Sunday) and 12 months of a year
+
+·         Airport ranking on volume of operated air-traffic and their tolerance to weather delays
+
+ 
+
+Airliners Sheet:
+
+1.      Average weekdays and monthly air miles summary by airliners:
+
+ 
+
+Data Set Filtered/ Truncated: No
+
+ 
+
+Axes choices and labeling: Cumulative annual air miles (million miles) along Y-axis and weekdays/ months along X-axis. Tooltip provides airline detail
+
+ 
+
+Colors Used: Auto generated multi-color trend line per airline. Saturated color strokes with white background chosen for better visibility
+
+ 
+
+Inferences: Plotting the departure time as a continuous set, the trend lines help to bring out the fact that almost all airlines have more air miles on Mon, Thu, Fri and Sun and minimum on Sat. Monthly trend reveals lesser miles for Sep, Oct & Nov 2008 (Note the dips)
+
+ 
+
+2.      Cumulative flight traffic summary over weekdays and months by airliners:
+
+ 
+
+Data Set Filtered/ Truncated: No
+
+ 
+
+Axes choices and labeling: Total number of flights operated (thousands) along Y-axis and weekdays/ months along X-axis. Tooltip provides airline detail
+
+ 
+
+Colors Used: Auto generated multi-color trend line per airline. Saturated color strokes with white background chosen for better visibility
+
+ 
+
+Inferences: Dips observed in previous chart (Saturday & Months of Sep, Oct & Nov) are contributed by lower flight count and not via reduction in flight distance. These indicates that as a flier you can expect less frequent flights during these periods
+
+ 
+
+Airports Sheet:
+
+ 
+
+1.      Airport flight traffic and average weather delays:
+
+ 
+
+Data Set Filtered/ Truncated: Yes. Only a relevant set of 24 airports are chosen and represented for ease of visualization and scalability
+
+ 
+
+Axes choices and labeling: Number of flights (Thousands), Average weather delay per Flight (Minutes) along Y-axis and Airports along X-axis. Logarithmic axes have been chosen over uniform to bring out the minute details which would have been over shadowed otherwise (Ex. Flight volumes for airports with greater delay would tend to zero in visualization with uniform axes). Tooltip provides airport detail
+
+ 
+
+Colors Used: Stepped green and red colors used for total flights operated and average weather delay respectively. The deeper the shade of green more is the number of flights operated while lighter the shade of red lesser will be average flight delay (Green and red were chosen as they signify mobility and stop respectively)
+
+ 
+
+Inferences: Busiest airports seems to be the ones least impacted by weather delays (less than six minutes of average delay) while almost all of the airports having an average weather delay of 10 minutes or more appear to operate less than 500 flights a year. Geological position (Ex: ATL, DFW) and efficient air strip maintenance even with longer severe winter conditions (Ex: ORD, DEN) seems to be few of the differentiating factors
+
+ 
+
+Tableau Public Link:
+
+https://us-east-1.online.tableau.com/t/manojitsvisualizationblog/views/2008USDomesticAirTrafficDataAssessment/Airliners?iframeSizedToWindow=true&:embed=y&:showAppBanner=false&:display_count=no&:showVizHome=no
+
+ 
+
+ 
+
+P.S: If interested please email manojit2@illionis.edu for explorer access

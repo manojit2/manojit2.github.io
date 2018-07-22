@@ -1,0 +1,25 @@
+﻿Airport_Code,Airport_Name,Avg_weather_delay,NumberOfFlights
+ATL,Hartsfield-Jackson Atlanta International Airport,4.872294594,131613
+ORD,Chicago O'Hare International Airport,4.601096860,126509
+DFW,Dallas/Fort Worth International Airport,3.987400562,95667
+LAX,Los Angeles International Airport,0.970664366,60496
+LAS,McCarran International Airport,1.549630257,54704
+EWR,Newark Liberty International Airport,3.332303789,53132
+SFO,San Francisco International Airport,1.513194334,45503
+SEA,Seattle-Tacoma International Airport,2.546970606,44027
+DTW,Detroit Metropolitan Airport,5.281530652,43923
+JFK,John F. Kennedy International Airport,6.735860913,34706
+MSP,Minneapolis-Saint Paul International Airport,5.430291280,32472
+IAD,Washington Dulles International Airport,4.158202623,22125
+SDF,Louisville International Airport,5.004059883,5786
+TYS,McGhee Tyson Airport,6.437017995,3305
+ASE,Aspen-Pitkin County Airport,13.976663786,1588
+DRO,Durango-La Plata County Airport,16.594315245,578
+LAW,Lawton-Fort Sill Regional Airport,10.877256318,369
+TWF,Magic Valley Regional Airport,24,253
+TXK,Texarkana Regional Airport,15.103896104,214
+LCH,Lake Charles Regional Airport,21.627272727,160
+SCE,University Park Airport,18.553846154,82
+CMX,Houghton County Memorial Airport,16.269230769,34
+BPT,Jack Brooks Regional Airport,26.333333333,27
+BLI,Bellingham International Airport,69.5,4
